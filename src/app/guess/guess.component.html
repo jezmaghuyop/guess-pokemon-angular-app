@@ -1,7 +1,8 @@
 <!-- <transition name="animate-section">-->
 <!-- <section v-if="isPlaying" class="poke-section"> -->
 <section class="poke-section" [ngClass]="{'animate-section-leave-active': !appStateService.isPlaying, 
-            'animate-section-leave-to': !appStateService.isPlaying}">
+            'animate-section-leave-to': !appStateService.isPlaying, 
+            'animate-section-enter-active': appStateService.isPlaying}">
     <h1 class="poke-title">
         Who's that pokemon?
     </h1>
