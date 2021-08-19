@@ -1,0 +1,39 @@
+<!-- <transition name="animate-section">-->
+<!-- <section v-if="isPlaying" class="poke-section"> -->
+<section class="poke-section" [ngClass]="{'animate-section-leave-active': !appStateService.isPlaying, 
+            'animate-section-leave-to': !appStateService.isPlaying}">
+    <h1 class="poke-title">
+        Who's that pokemon?
+    </h1>
+    <div class="poke-question-wrapper">
+        <span class="poke-question">
+            <span class="poke-question-number">
+                {{ appStateService.question }}
+            </span>
+            <span class="poke-question-amount">
+                / {{ appStateService.questionAmount}}
+            </span>
+        </span>
+        <span class="poke-score">
+            {{ appStateService.score }}
+            <small>pts</small>
+        </span>
+        <!-- <div class="poke-image"
+            :class="{'poke-image-success': isChecked && selected.name === answer.name, 'poke-image-error': isChecked && selected.name !== answer.name}">
+            <img :src="image" alt="No cheating" class="poke-image-img">
+        </div> -->
+        <!-- <transition-group tag="div" name="animate-options" :class="{'poke-options-answers': isChecked}"
+            class="poke-options">
+            <button v-for="(pokemon, index) in options" :key="pokemon.name" :data-index="index"
+                :class="{'selected': selected.index === index, 'success': isChecked && pokemon.name === answer.name , 'error': isChecked && selected.index === index && selected.name !== answer.name}"
+                class="poke-options-button" @click="selectAnswer(pokemon.name, index)">{{ pokemon.name | prettifyName
+                }}</button>
+        </transition-group> -->
+        <footer class="poke-buttons">
+            <!-- <button :disabled="isChecked || Object.keys(selected).length < 1" class="button"
+                @click="checkAnswer">Submit</button>
+            <button :disabled="!isChecked" class="button" @click="getNextQuestion">Next</button> -->
+        </footer>
+    </div>
+</section>
+<!--</transition> -->
