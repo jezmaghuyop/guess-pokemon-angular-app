@@ -1,0 +1,24 @@
+<!-- <transition name="animate-section"> -->
+<!-- <section v-if="!isPlaying && !isDone" class="poke-section"> -->
+<section class="poke-section" [ngClass]="{'animate-section-leave-active': appStateService.isPlaying, 
+            'animate-section-leave-to': appStateService.isPlaying}">
+    <h2>What type of trainer are you?</h2>
+    <div class="poke-intro-trainer">
+        <div class="poke-ball"></div>
+        <img [ngClass]="{'active': trainerHovered === 'classic'}" class="poke-trainer-img poke-trainer-img-classic"
+            src="https://raw.githubusercontent.com/tiffachoo/pokesprites/master/trainers/red-rb.png" alt="Trainer red">
+
+        <img [ngClass]="{'active': trainerHovered === 'master'}" class="poke-trainer-img poke-trainer-img-master"
+            src="https://raw.githubusercontent.com/tiffachoo/pokesprites/master/trainers/red-sm.png"
+            alt="Trainer red again">
+    </div>
+    <button class="button spacer" (click)="startGame(151)" (mouseover)="trainerHover('classic')"
+        (mouseout)="trainerHover(null)">
+        Classic
+    </button>
+    <button class="button" (click)="startGame(0)" (mouseover)="trainerHover('master')" (mouseout)="trainerHover(null)">
+        Master
+    </button>
+
+</section>
+<!-- </transition> -->
