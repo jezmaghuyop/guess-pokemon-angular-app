@@ -22,9 +22,10 @@ export class AppStateService {
   readonly _pokemonData$ = this._pokemonData.asObservable();
 
   pkmnTotal: number = 802;
+  mode: string = 'classic';
 
   get questionAmount(): number {
-    return 10;
+    return 2;
   }
 
   get question(): number {

@@ -18,12 +18,15 @@ export class ModeSelectionComponent implements OnInit {
     this.trainerHovered = val;
   }
 
-  startGame(val: number) {
+  startGame(val: number, mode: string = 'classic') {
+    this.appStateService.mode = mode;
     this.appStateService.question = 0;
     this.appStateService.score = 0;
-    this.appStateService.isPlaying = true;
-
     this.appStateService.pkmnAmount = val || this.appStateService.pkmnTotal;
+
+    this.appStateService.pokemonData = this.appStateService.pokemonData.slice(0, this.appStateService.pkmnAmount + 1);
+
+    this.appStateService.isPlaying = true;
   }
 
 }

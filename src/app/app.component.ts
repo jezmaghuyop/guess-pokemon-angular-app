@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getPokemonData();
+  }
+
+  getPokemonData(): void {
     let pokeList = localStorage.getItem('pokeList');
 
     if (pokeList) {

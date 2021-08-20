@@ -1,8 +1,10 @@
 <!-- <transition name="animate-section">-->
 <!-- <section v-if="isPlaying" class="poke-section"> -->
-<section class="poke-section" [ngClass]="{'animate-section-leave-active': !appStateService.isPlaying, 
+<section class="poke-section" [ngClass]="{
+            'animate-section-leave-active': !appStateService.isPlaying, 
             'animate-section-leave-to': !appStateService.isPlaying, 
-            'animate-section-enter-active': appStateService.isPlaying}">
+            'animate-section-enter-active': appStateService.isPlaying }">
+
     <h1 class="poke-title">
         Who's that pokemon?
     </h1>
@@ -19,7 +21,32 @@
             {{ appStateService.score }}
             <small>pts</small>
         </span>
-        <!-- <div class="poke-image"
+        <!-- 
+        'poke-image-success': isChecked && ((selected?.name === correctAnswer?.name && option.name === correctAnswer?.name),
+        'poke-image-error': isChecked && selected?.name !== correctAnswer?.name -->
+        <div class="poke-image" [ngClass]="{'poke-image-success': isChecked && (selected?.name === correctAnswer?.name),
+            'poke-image-error': isChecked && selected?.name !== correctAnswer?.name}">
+            <img [src]="imageSrc" alt="No cheating" class="poke-image-img">
+        </div>
+
+        <div name="animate-options" class="poke-options" [ngClass]="{'poke-options-answers': isChecked}">
+            <ng-container *ngFor="let option of options; index as i; trackBy:trackByIndex">
+                <button class="poke-options-button" [ngClass]="{
+                    'selected': selected?.name === option.name,
+                    'success': isChecked && ((selected?.name === correctAnswer?.name && option.name === correctAnswer?.name) ||
+                    (option.name === correctAnswer?.name)),
+                    'error': isChecked && (selected?.name !== correctAnswer?.name && selected?.name === option.name)}"
+                    (click)="selectAnswer(option, i)">
+                    {{option.name| prettifyName}}
+                </button>
+            </ng-container>
+
+        </div>
+
+        <!-- 
+            'error': isChecked && (selected.name !== correctAnswer.name && option.name === correctAnswer.name) }
+            
+            <div class="poke-image"
             :class="{'poke-image-success': isChecked && selected.name === answer.name, 'poke-image-error': isChecked && selected.name !== answer.name}">
             <img :src="image" alt="No cheating" class="poke-image-img">
         </div> -->
@@ -31,6 +58,9 @@
                 }}</button>
         </transition-group> -->
         <footer class="poke-buttons">
+            <button [disabled]="!selected || isChecked" class="button" (click)="checkAnswer()">Submit</button>
+            <button [disabled]="!isChecked" class="button" (click)="getNextQuestion()">Next</button>
+
             <!-- <button :disabled="isChecked || Object.keys(selected).length < 1" class="button"
                 @click="checkAnswer">Submit</button>
             <button :disabled="!isChecked" class="button" @click="getNextQuestion">Next</button> -->
